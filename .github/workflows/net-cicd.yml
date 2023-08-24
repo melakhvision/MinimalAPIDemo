@@ -23,6 +23,27 @@ jobs:
         uses: actions/setup-dotnet@v3
         with:
           dotnet-version: 6.0
-      - run: dotnet restore
-      - run: cd MinimalAPIDemo && dotnet run restore
-      - run: cd MinimalAPIDemo.Test && dotnet run restore && dotnet test MinimalAPIDemo.Test
+      - run: |
+          cd MinimalAPIDemo && dotnet run restore
+          cd .. && cd MinimalAPIDemo.Test && dotnet run restore
+          dotnet test MinimalAPIDemo.Test
+
+  build:
+    runs-on: ubuntu-20.04
+    needs: test
+    steps:
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v2
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+      - name: Login to Azure Contaiern Registry
+        uses: docker/login-action@v2
+        with:
+          registry: ${{ secrets.REGISTRY_USERNAME }}.azurecr.io
+          username: ${{ secrets.REGISTRY_USERNAME }}
+          password: ${{ secrets.REGISTRY_PASSWORD }}
+      - name: Build and push
+        uses: docker/build-push-action@v3
+        with:
+          push: true
+          tags: ${{ secrets.REGISTRY_USERNAME }}.azurecr.io/${{ secrets.REGISTRY_USERNAME }}:latest
