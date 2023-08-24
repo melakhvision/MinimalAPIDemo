@@ -24,8 +24,8 @@ jobs:
         with:
           dotnet-version: 6.0
       - run: |
-          cd MinimalAPIDemo && dotnet run restore
-          cd .. && cd MinimalAPIDemo.Test && dotnet run restore
+          dotnet restore
+          cd .. && cd MinimalAPIDemo.Test && dotnet restore
           dotnet test MinimalAPIDemo.Test
 
   build:
@@ -47,3 +47,10 @@ jobs:
         with:
           push: true
           tags: ${{ secrets.REGISTRY_USERNAME }}.azurecr.io/${{ secrets.REGISTRY_USERNAME }}:latest
+
+  # deploy:
+  #   needs: build
+  #   runs-on: ubuntu-22.04
+  #   steps:
+  #     - name: deploying to aks
+  #       uses:
