@@ -19,7 +19,7 @@ WORKDIR /app
 # RUN dotnet restore
 COPY . .
 WORKDIR /app/MinimalAPIDemo
-ENV PORT=7025
+ENV PORT=3000
 ENV ConnectionURI=
 EXPOSE 3000
 CMD [ "dotnet", "run" ]
