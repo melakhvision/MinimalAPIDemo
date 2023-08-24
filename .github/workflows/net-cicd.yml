@@ -1,0 +1,28 @@
+name: Asp Net deploy azure
+
+on:
+  push:
+    branches: ["main"]
+
+jobs:
+  test:
+    runs-on: ubuntu-20.04
+    services:
+      mongo:
+        image: mongo
+        ports:
+          - 27017:27017
+        env:
+          MONGO_INITDB_ROOT_USERNAME: root
+          MONGO_INITDB_ROOT_PASSWORD: 12teyrtgf
+          MONGO_INITDB_DATABASE: tododb
+    steps:
+      - name: Checkout project
+        uses: actions/checkout@v3
+      - name: set up dotnet
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: 6.0
+      - run: dotnet restore
+      - run: cd MinimalAPIDemo && dotnet run restore
+      - run: cd MinimalAPIDemo.Test && dotnet run restore && dotnet test MinimalAPIDemo.Test

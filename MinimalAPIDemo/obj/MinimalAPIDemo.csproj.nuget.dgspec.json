@@ -1,0 +1,81 @@
+{
+  "format": 1,
+  "restore": {
+    "/home/codekhalipha/Documents/MinimalAPIDemo/MinimalAPIDemo/MinimalAPIDemo.csproj": {}
+  },
+  "projects": {
+    "/home/codekhalipha/Documents/MinimalAPIDemo/MinimalAPIDemo/MinimalAPIDemo.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/home/codekhalipha/Documents/MinimalAPIDemo/MinimalAPIDemo/MinimalAPIDemo.csproj",
+        "projectName": "MinimalAPIDemo",
+        "projectPath": "/home/codekhalipha/Documents/MinimalAPIDemo/MinimalAPIDemo/MinimalAPIDemo.csproj",
+        "packagesPath": "/home/codekhalipha/.nuget/packages/",
+        "outputPath": "/home/codekhalipha/Documents/MinimalAPIDemo/MinimalAPIDemo/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/home/codekhalipha/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "Microsoft.EntityFrameworkCore.InMemory": {
+              "target": "Package",
+              "version": "[7.0.10, )"
+            },
+            "MongoDB.Driver": {
+              "target": "Package",
+              "version": "[2.21.0, )"
+            },
+            "Swashbuckle.AspNetCore": {
+              "target": "Package",
+              "version": "[6.5.0, )"
+            },
+            "System.Net.Http.Json": {
+              "target": "Package",
+              "version": "[6.0.1, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/6.0.121/RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}
