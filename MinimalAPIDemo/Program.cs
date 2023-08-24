@@ -14,9 +14,9 @@ string databaseName = builder.Configuration.GetSection("MongoDBSettings").GetVal
 builder.Services.AddTransient<MongoClient>((_provider) => new MongoClient(connectionString));
 var ConnectionURI = Environment.GetEnvironmentVariable("ConnectionURI");
 
-var PORT = Environment.GetEnvironmentVariable("PORT");
-var APP_URI = Environment.GetEnvironmentVariable("APP_URI");
-Console.WriteLine($"the application is running port {APP_URI} on {PORT}");
+// var PORT = Environment.GetEnvironmentVariable("PORT");
+// var APP_URI = Environment.GetEnvironmentVariable("APP_URI");
+// Console.WriteLine($"the application is running port {APP_URI} on {PORT}");
 var app = builder.Build();
 
 app.UseSwagger();
@@ -103,11 +103,13 @@ app.MapDelete("/api/todos{id}", async (string id, MongoClient connection) =>
 
 app.MapGet("/api/health", () => "running");
 
-if (string.IsNullOrWhiteSpace(APP_URI))
-{
-    app.Run();
-}
-else
-{
-    app.Run(APP_URI + ":" + PORT);
-}
+// if (string.IsNullOrWhiteSpace(APP_URI))
+// {
+//     app.Run();
+// }
+// else
+// {
+//     app.Run(APP_URI + ":" + PORT);
+// }
+
+app.Run();

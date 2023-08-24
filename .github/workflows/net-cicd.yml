@@ -24,6 +24,8 @@ jobs:
         with:
           dotnet-version: 6.0
       - run: |
+          export ConnectionURI=mongodb://root:12teyrtgf@localhost:27017
+          echo $ConnectionURI
           dotnet restore
           dotnet restore MinimalAPIDemo.Test/MinimalAPIDemo.Test.csproj
           dotnet restore MinimalAPIDemo/MinimalAPIDemo.csproj
