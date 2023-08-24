@@ -21,7 +21,7 @@ COPY . .
 WORKDIR /app/MinimalAPIDemo
 ENV PORT=7025
 ENV ConnectionURI=
-EXPOSE 7025 3000
+EXPOSE 3000
 CMD [ "dotnet", "run" ]
 
 
