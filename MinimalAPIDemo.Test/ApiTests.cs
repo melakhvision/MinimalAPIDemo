@@ -23,10 +23,10 @@ namespace MinimalAPIDemo.Test
     [TestMethod]
     public async Task DefaultRoute_ReturnsHelloWorld()
     {
-      var response = await _httpClient.GetAsync("");
+      var response = await _httpClient.GetAsync("/api/health");
       var stringResult = await response.Content.ReadAsStringAsync();
 
-      Assert.AreEqual("Hello World!", stringResult);
+      Assert.AreEqual("running", stringResult);
     }
 
     [TestMethod]
