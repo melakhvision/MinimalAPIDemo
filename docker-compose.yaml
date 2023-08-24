@@ -10,3 +10,13 @@ services:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: 12teyrtgf
       MONGO_INITDB_DATABASE: tododb
+
+  minimalapi:
+    image: minimalapi:latest
+    container_name: minimalapi
+    ports:
+      - 3000:3000
+    depends_on:
+      - mongo
+    env_file:
+      - .env

@@ -12,8 +12,12 @@ string collectionName = builder.Configuration.GetSection("MongoDBSettings").GetV
 string databaseName = builder.Configuration.GetSection("MongoDBSettings").GetValue<string>("DatabaseName");
 
 builder.Services.AddTransient<MongoClient>((_provider) => new MongoClient(connectionString));
-var app = builder.Build();
+var ConnectionURI = Environment.GetEnvironmentVariable("ConnectionURI");
+
 var PORT = Environment.GetEnvironmentVariable("PORT");
+var APP_URI = Environment.GetEnvironmentVariable("APP_URI");
+Console.WriteLine($"the application is running port {APP_URI} on {PORT}");
+var app = builder.Build();
 
 app.UseSwagger();
 app.UseSwaggerUI();
@@ -35,7 +39,7 @@ app.MapGet("/api/todos", async (MongoClient connection) =>
     }
 });
 
-app.MapGet("/api/todos{name}", async (string name, MongoClient connection) =>
+app.MapGet("/api/todos{id}", async (string id, MongoClient connection) =>
 {
     try
     {
@@ -43,7 +47,7 @@ app.MapGet("/api/todos{name}", async (string name, MongoClient connection) =>
         var client = new MongoClient(connectionString);
         var database = client.GetDatabase(databaseName);
         var collection = database.GetCollection<Todo>(collectionName);
-        var result = await collection.Find(record => record.Name == name).FirstOrDefaultAsync();
+        var result = await collection.Find(record => record._id == id).FirstOrDefaultAsync();
 
         if (result is null)
         {
@@ -97,29 +101,13 @@ app.MapDelete("/api/todos{id}", async (string id, MongoClient connection) =>
     }
 });
 
-app.MapGet("/", () => "Hello World!");
+app.MapGet("/api/health", () => "running");
 
-// app.MapGet("/todoitems", async (TodoDb db) => await db.Todos.ToListAsync());
-// app.MapPost("/todoitems", async (Todo todo, TodoDb db) =>
-// {
-
-//     db.Todos.Add(todo);
-//     await db.SaveChangesAsync();
-
-//     return Results.Created($"/todoitems/{todo.Id}", todo);
-// });
-
-// app.MapDelete("/todoitems/{id}", async (int id, TodoDb db) =>
-// {
-//     if (await db.Todos.FindAsync(id) is Todo todo)
-//     {
-//         db.Todos.Remove(todo);
-//         await db.SaveChangesAsync();
-//         return Results.NoContent();
-//     }
-
-//     return Results.NotFound();
-// });
-app.MapGet("/sum", (int? n1, int? n2) => n1 + n2);
-
-app.Run();
+if (string.IsNullOrWhiteSpace(APP_URI))
+{
+    app.Run();
+}
+else
+{
+    app.Run(APP_URI + ":" + PORT);
+}
