@@ -20,7 +20,7 @@ WORKDIR /app
 COPY . .
 WORKDIR /app/MinimalAPIDemo
 ENV PORT=3000
-ENV ConnectionURI=
+ENV ConnectionURI="mongodb://khaliphadb:yAlJljJcktmPPq6IlAmWsGcCuye6GLqY74XyEVKUvNJZJlg8F1ue0bGB3zPrk9LDit3kGheAs2UzACDb1IFewQ==@khaliphadb.mongo.cosmos.azure.com:10255/?ssl=true&retrywrites=false&replicaSet=globaldb&maxIdleTimeMS=120000&appName=@khaliphadb@"
 EXPOSE 3000
 CMD [ "dotnet", "run" ]
 
